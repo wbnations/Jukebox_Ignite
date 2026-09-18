@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="theme-color" content="#f7f4ef" />
-    <title>AI Skills Jukebox</title>
+    <meta name="theme-color" content="#091f2c" />
+    <meta name="description" content="Build a personalized Microsoft Ignite AI learning mix." />
+    <title>Skills Quest · AI Jukebox</title>
     <script>
       (() => {
         const param = new URLSearchParams(window.location.search).get("scoutTheme");
-        const theme =
-          param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        const theme = param || "dark";
         document.documentElement.setAttribute("data-theme", theme);
       })();
     </script>
