@@ -96,14 +96,13 @@ const playlists = {
 }
 
 const app = document.querySelector('#app')
-const RESULT_TIMEOUT_SECONDS = 15 * 60
+const RESULT_TIMEOUT_SECONDS = 15
 let currentStep = -1
 let answers = {}
 let inactivityTimer
 let resultTimer
 
 const icon = (name, className = '') => `<i data-lucide="${name}" class="${className}" aria-hidden="true"></i>`
-const formatCountdown = (totalSeconds) => `${Math.floor(totalSeconds / 60)}:${String(totalSeconds % 60).padStart(2, '0')}`
 
 function renderShell(content, progress = 0) {
   app.innerHTML = `
@@ -188,7 +187,7 @@ async function renderResult() {
         <div class="scan-copy">${icon('scan-line')}<strong>Scan to keep learning</strong><span>Open your camera and point it at the code.</span></div>
       </div>
       <button class="secondary-button" id="restart-button" type="button">${icon('rotate-ccw')} Find another playlist</button>
-      <p class="result-timer" role="timer">Returning to start in <strong id="countdown">${formatCountdown(RESULT_TIMEOUT_SECONDS)}</strong></p>
+      <p class="result-timer" role="timer">Returning to start in <strong id="countdown">${RESULT_TIMEOUT_SECONDS}</strong> seconds</p>
     </section>`, 100)
 
   await QRCode.toCanvas(document.querySelector('#qr-code'), result.url, { width: 360, margin: 2, errorCorrectionLevel: 'H' })
@@ -199,7 +198,7 @@ async function renderResult() {
   resultTimer = window.setInterval(() => {
     secondsRemaining -= 1
     const countdown = document.querySelector('#countdown')
-    if (countdown) countdown.textContent = formatCountdown(secondsRemaining)
+    if (countdown) countdown.textContent = secondsRemaining
     if (secondsRemaining <= 0) renderWelcome()
   }, 1000)
 }
